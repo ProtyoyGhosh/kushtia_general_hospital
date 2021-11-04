@@ -22,6 +22,11 @@ const style = {
 const BookingModal = ({ open, handleClose, booking, date }) => {
     const { name, time, space } = booking;
 
+    const handleConfirmBooking = e => {
+        alert('conferming')
+        e.preventDefault();
+    }
+
     return (
         <Modal
             open={open}
@@ -29,56 +34,56 @@ const BookingModal = ({ open, handleClose, booking, date }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box component="form"
-                sx={style}>
-
+            <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     {name}
                 </Typography>
-                <TextField
-                    sx={{ width: '90%', m: 1 }}
-                    disabled
-                    id="standard-size-small"
-                    label='Appointed Time:'
-                    defaultValue={time}
-                    size="small"
-                    variant="standard"
-                />
-                <TextField
-                    sx={{ width: '90%', m: 1 }}
+                <form onSubmit={handleConfirmBooking}>
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
+                        disabled
+                        id="standard-size-small"
+                        label='Appointed Time:'
+                        defaultValue={time}
+                        size="small"
+                        variant="standard"
+                    />
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
 
-                    id="standard-size-small"
-                    defaultValue='Your Name'
-                    size="small"
-                    variant="standard"
-                />
-                <TextField
-                    sx={{ width: '90%', m: 1 }}
+                        id="standard-size-small"
+                        defaultValue='Your Name'
+                        size="small"
+                        variant="standard"
+                    />
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
 
-                    id="standard-size-small"
-                    defaultValue='Your Email'
-                    size="small"
-                    variant="standard"
-                />
-                <TextField
-                    sx={{ width: '90%', m: 1 }}
+                        id="standard-size-small"
+                        defaultValue='Your Email'
+                        size="small"
+                        variant="standard"
+                    />
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
 
-                    id="standard-size-small"
-                    defaultValue="Phone Number"
-                    size="small"
-                    variant="standard"
-                />
-                <TextField
-                    sx={{ width: '90%', m: 1 }}
-                    disabled
-                    id="standard-size-small"
-                    label='Appointed on'
-                    defaultValue={date.toDateString()}
-                    size="small"
-                    variant="standard"
-                />
+                        id="standard-size-small"
+                        defaultValue="Phone Number"
+                        size="small"
+                        variant="standard"
+                    />
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
+                        disabled
+                        id="standard-size-small"
+                        label='Appointed on'
+                        defaultValue={date.toDateString()}
+                        size="small"
+                        variant="standard"
+                    />
 
-                <Button sx={{ m: 2 }} variant="contained">Confirm</Button>
+                    <Button type="submit" sx={{ m: 2 }} variant="contained">Confirm</Button>
+                </form>
 
             </Box>
         </Modal>
