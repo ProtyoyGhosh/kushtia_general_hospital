@@ -1,12 +1,15 @@
-import { Button, Container, Grid } from '@mui/material';
+import { Button, Container, Grid, CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import img from '../../../images/login.png';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
+    const { registerUser, isLoading } = useAuth();
+
     const handleOnchange = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -17,8 +20,12 @@ const Register = () => {
 
     const handleLogin = e => {
         e.preventDefault();
-        alert('hello')
+        if (loginData.password !== loginData.confirmPassword)
+            alert('please give correct password')
+        return;
     }
+    registerUser(loginData.email, loginData.password);
+
     return (
         <Container>
             <Grid container spacing={2} sx={{ mt: 8 }}>
@@ -26,10 +33,11 @@ const Register = () => {
                     <Typography variant="h6" sx={{ color: 'info.main', fontWeight: '600' }} gutterBottom component="div">
                         Please Register
                     </Typography>
-                    <form onSubmit={handleLogin}>
+                    {isLoading ? <CircularProgress /> : <form onSubmit={handleLogin}>
                         <TextField sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
                             label="Your Email"
+                            type='email'
                             name='email'
                             onChange={handleOnchange}
                             variant="standard" />
@@ -43,14 +51,14 @@ const Register = () => {
                         <TextField sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
                             type="password"
-                            name='password2'
+                            name='Confirmpassword'
                             onChange={handleOnchange}
                             label="Confirm Password"
                             variant="standard" />
                         <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Register</Button>
 
                         <Link style={{ textDecoration: 'none' }} to='/login'><Button variant="text">Already Registered? Please Login</Button></Link>
-                    </form>
+                    </form>}
                 </Grid>
 
                 <Grid item xs={6} md={4}>
