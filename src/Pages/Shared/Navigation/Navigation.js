@@ -28,7 +28,7 @@ const Navigation = () => {
                     </Typography>
                     <Link className='link_style' to='/home'><Button color="inherit">Home</Button></Link>
                     <Link className='link_style' to='/appoinment'><Button color="inherit">Appoinment</Button></Link>
-                    <Button color="inherit">Login</Button>
+                    <Link className='link_style' to='/login'><Button color="inherit">Login</Button></Link>
                 </Toolbar>
             </AppBar>
         </Box>
