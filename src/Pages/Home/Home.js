@@ -7,7 +7,7 @@ import Navigation from '../Shared/Navigation/Navigation';
 const Home = () => {
     return (
         <div>
-            <Navigation></Navigation>
+            {/* <Navigation></Navigation> */}
             <Banner></Banner>
             <Services></Services>
             <AppoinmentBanner></AppoinmentBanner>

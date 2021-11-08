@@ -1,12 +1,14 @@
-import { Button, Container, Grid } from '@mui/material';
+import { Alert, Button, Container, Grid, CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import img from '../../../images/login.png';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { user, loginUser, isLoading, signinWithGoogle } = useAuth();
     const handleOnchange = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -17,7 +19,10 @@ const Login = () => {
 
     const handleLogin = e => {
         e.preventDefault();
-        alert('hello')
+        loginUser(loginData.email, loginData.password);
+    }
+    const handleGoogleSignin = () => {
+        signinWithGoogle()
     }
     return (
         <Container>
@@ -31,19 +36,25 @@ const Login = () => {
                             id="standard-basic"
                             label="Your Email"
                             name='email'
-                            onChange={handleOnchange}
+                            onBlur={handleOnchange}
                             variant="standard" />
                         <TextField sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
                             type="password"
                             name='password'
-                            onChange={handleOnchange}
+                            onBlur={handleOnchange}
                             label="Your Password"
                             variant="standard" />
                         <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Log In</Button>
 
                         <Link style={{ textDecoration: 'none' }} to='/register'><Button variant="text">New here? Please Register</Button></Link>
                     </form>
+
+                    {user?.email && <Alert severity="success">User logged in SUCCESSFULLY!!</Alert>
+                    }
+
+                    ..................................OR..................................<br />
+                    <Button onClick={handleGoogleSignin} sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Google Signin</Button>
                 </Grid>
 
                 <Grid item xs={6} md={4}>
